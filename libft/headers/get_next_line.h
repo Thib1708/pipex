@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:11:19 by tgiraudo          #+#    #+#             */
-/*   Updated: 2022/11/25 21:36:24 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:07:02 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # include <unistd.h>
 # include <fcntl.h>
 
-int	get_next_line(int fd, char **line);
+int		get_next_line(int fd, char **line);
 char	*ft_read_buf(char *save, int fd);
 char	*ft_line(char *save);
 char	*ft_next_line(char *save);

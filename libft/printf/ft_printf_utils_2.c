@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 09:01:31 by tgiraudo          #+#    #+#             */
-/*   Updated: 2022/11/24 13:20:31 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2022/12/06 18:11:27 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,4 +18,3 @@ int	ft_putnbr_undec(unsigned int n)
 		return (ft_putchar(n + '0'));
 	return (ft_putnbr(n / 10) + ft_putchar((n % 10) + '0'));
 }
-

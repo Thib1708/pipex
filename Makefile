@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:12:25 by tgiraudo          #+#    #+#              #
-#    Updated: 2022/12/05 16:59:38 by tgiraudo         ###   ########.fr        #
+#    Updated: 2022/12/06 18:52:02 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,9 @@ INCLUDES 	= -I ${HEADER_PATH}
 
 LIBFT 		= -L ./libft -lft 
 
-SRCS		=	srcs/main.c	\
+SRCS		=	srcs/main.c			\
+				srcs/init_struct.c	\
+				srcs/ft_pipe.c 		\
 				
 OBJS		= ${SRCS:.c=.o}
 
