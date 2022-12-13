@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:26:53 by tgiraudo          #+#    #+#             */
-/*   Updated: 2022/12/06 20:33:24 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2022/12/10 17:50:23 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,46 +17,46 @@ t_arg	*init_arg(char **argv, char **env)
 	t_arg	*arg;
 
 	arg = malloc(sizeof(t_arg));
+	if (!arg)
+		return (NULL);
+	arg->env = env;
 	arg->file1 = argv[1];
 	arg->file2 = argv[4];
 	arg->cmd1 = ft_split(argv[2], " ");
 	arg->cmd2 = ft_split(argv[3], " ");
-	arg->path1 = get_path(env, arg->cmd1[0]);
-	arg->path2 = get_path(env, arg->cmd2[0]);
-	arg->env = env;
-	if (!arg->path1 || !arg->path2 || !arg->cmd1 || !arg->cmd2)
+	arg->cmd1[0] = ft_get_path(arg, arg->cmd1[0]);
+	arg->cmd2[0] = ft_get_path(arg, arg->cmd2[0]);
+	if (!arg->cmd1[0] || !arg->cmd2[0])
 		return (NULL);
 	return (arg);
 }
 
-char	*get_path(char **env, char *cmd)
+char	*ft_get_path(t_arg *arg, char *cmd)
 {
-	char	**path;
+	char	**paths;
 	char	*temp;
 	char	*current_path;
 	int		i;
 
-	i = 0;
-	path = ft_split(get_all_path(env), ":");
-	if (!path)
+	paths = ft_split(get_all_path(arg->env), ":");
+	if (!paths)
 		return (NULL);
-	while (*path)
+	i = -1;
+	while (paths[++i])
 	{
-		temp = ft_strjoin(*path, "/");
-		free(*path);
+		temp = ft_strjoin(paths[i], "/");
 		current_path = ft_strjoin(temp, cmd);
 		free(temp);
 		if (access(current_path, F_OK) == 0)
-		{
-			while (*path++)
-				free(*path);
-			return (current_path);
-		}
+			break ;
 		free(current_path);
-		path++;
 	}
-	ft_printf("zsh: command not found: %s", cmd);
-	return (NULL);
+	i = 0;
+	while (paths[i])
+		free(paths[i++]);
+	free(paths);
+	free(cmd);
+	return (current_path);
 }
 
 char	*get_all_path(char **env)
