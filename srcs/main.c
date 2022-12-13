@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:27:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2022/12/10 17:35:06 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:58:53 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,3 +44,4 @@ int	main(int argc, char **argv, char **env)
 	ft_free_arg(arg);
 	return (0);
 }
+

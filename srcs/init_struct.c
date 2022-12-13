@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 15:26:53 by tgiraudo          #+#    #+#             */
-/*   Updated: 2022/12/13 11:49:58 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:58:59 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,3 +69,4 @@ char	*get_all_path(char **env)
 	}
 	return (NULL);
 }
+

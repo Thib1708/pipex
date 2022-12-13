@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/06 18:10:02 by tgiraudo          #+#    #+#             */
-/*   Updated: 2022/12/10 17:33:58 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2022/12/13 11:58:57 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,3 +90,4 @@ int	ft_pipe(t_arg *arg)
 	waitpid(pid2, NULL, 1);
 	return (0);
 }
+
