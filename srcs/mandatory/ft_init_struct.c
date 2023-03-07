@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init_struct_bonus.c                             :+:      :+:    :+:   */
+/*   ft_init_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 11:27:05 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:54:10 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../include/pipex_bonus.h"
+#include "../../include/pipex.h"
 
 char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
 {
@@ -41,24 +41,14 @@ int	ft_fill_struct(t_pipex *args, char **argv, int argc)
 	int	i;
 
 	i = 1;
-	if (!ft_strncmp("here_doc", argv[i], ft_strlen(argv[i])))
+	args->fdd = open(argv[i++], O_RDONLY);
+	if (args->fdd == -1)
 	{
-		args->here_doc = 1;
-		args->limiter = argv[++i];
-		args->outfile = open(argv[argc -1], O_RDWR | O_APPEND | O_CREAT, 0644);
-		i++;
+		ft_perror(argv[i - 1]);
+		args->fdd = 1;
+		args->i++;
 	}
-	else
-	{
-		args->fdd = open(argv[i++], O_RDONLY);
-		if (args->fdd == -1)
-		{
-			ft_perror(argv[i - 1]);
-			args->fdd = 1;
-			args->i++;
-		}
-		args->outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT, 0644);
-	}
+	args->outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	return (i);
 }
 
@@ -75,11 +65,10 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 		if (!ft_check_quotes(argv[i], '"') || !ft_check_quotes(argv[i], '\''))
 			return (free(args), NULL);
 	args->envp = envp;
-	args->here_doc = 0;
 	args->i = -1;
 	i = ft_fill_struct(args, argv, argc);
 	if (!i)
-		return (NULL);
+		return (free(args), NULL);
 	args->cmds = ft_fill_cmds(args, argv, argc, i);
 	if (!args->cmds)
 		return (free(args), NULL);
@@ -89,11 +78,9 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 int	ft_check_cmd(char *cmd)
 {
 	if (!ft_strncmp("./", cmd, 2))
-		return (ft_printf_fd(STDERR_FILENO, "pipex: %s: \
-		is a directory\n", cmd), 1);
+		return (write(STDERR_FILENO, "pipex: ./: is a directory\n", 27), 1);
 	if (!ft_strncmp(".", cmd, 1))
-		return (ft_printf_fd(STDERR_FILENO, "pipex: %s: filename argument \
-		required\n .: usage: . filename [arguments]", cmd), 1);
+		return (write(STDERR_FILENO, "pipex: .: filename argument required\n .: usage: . filename [arguments]\n", 71), 1);
 	return (0);
 }
 
@@ -121,8 +108,7 @@ char	*ft_get_path(t_pipex *arg, char *cmd)
 		current_path = NULL;
 	}
 	if (!current_path)
-		return (ft_printf_fd(STDERR_FILENO, "pipex: %s: \
-		command not found\n", cmd), ft_free_tab(paths), cmd);
+		return (ft_cmd_not_found(cmd), ft_free_tab(paths), cmd);
 	return (free(cmd), ft_free_tab(paths), current_path);
 }
 

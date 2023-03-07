@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:47 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/15 15:42:44 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/07 11:15:31 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,15 @@ int	ft_count_strings(char *cmd)
 
 	i = 0;
 	strings_count = 1;
+	if (cmd[0] == ' ' && !cmd[1])
+		return (0);
 	while (cmd[i])
 	{
 		while (cmd[i] != '\'' && cmd[i] != '"' && cmd[i] != ' ' && cmd[i])
 			i++;
-		while (cmd[i] == ' ' && cmd[i])
-		{
-			i++;
+		while (cmd[i] == ' ' && cmd[i++])
 			if (cmd[i] != ' ' || !cmd[i])
 				strings_count++;
-		}
 		if (cmd[i] == '\'' || cmd[i] == '"')
 		{
 			i++;
@@ -75,10 +74,67 @@ char	**ft_fill_stack(char *cmd, char **split_cmd, int i)
 char	**ft_split_cmd(char	*cmd)
 {
 	char	**split_cmd;
+	int		malloc_size;
 
-	split_cmd = malloc(sizeof(char *) * (ft_count_strings(cmd) + 1));
+	malloc_size = ft_count_strings(cmd);
+	if (malloc_size == 0)
+	{
+		split_cmd = malloc(sizeof(char *) * 2);
+		split_cmd[0] = ft_strdup(" ");
+		split_cmd[1] = NULL;
+		return (split_cmd);
+	}
+	split_cmd = malloc(sizeof(char *) * (malloc_size + 1));
 	if (!split_cmd)
 		return (NULL);
 	split_cmd = ft_fill_stack(cmd, split_cmd, 0);
 	return (split_cmd);
+}
+
+int	ft_check_quotes(char *cmd, char type_quote)
+{
+	int	i;
+	int	nb_quotes;
+
+	i = -1;
+	nb_quotes = 0;
+	if (!cmd)
+		return (0);
+	while (cmd[++i])
+	{
+		if (cmd[i] == type_quote)
+			nb_quotes++;
+	}
+	if (nb_quotes % 2 != 0)
+		return (ft_printf_fd(STDERR_FILENO, "Error parse quote\n"), 0);
+	return (1);
+}
+
+/*A function which remove the quotes*/
+char	*ft_rm_quotes(char *cmd)
+{
+	int		i;
+	int		j;
+	int		malloc_size;
+	char	*new_cmd;
+
+	malloc_size = 0;
+	i = -1;
+	while (cmd[++i])
+		if (cmd[i] != '"' && cmd[i] != '\'')
+			malloc_size++;
+	new_cmd = malloc(sizeof(char) * (malloc_size + 1));
+	if (!new_cmd)
+		return (NULL);
+	i = 0;
+	j = 0;
+	while (cmd[j])
+	{
+		if (cmd[j] == '"' || cmd[j] == '\'')
+			j++;
+		new_cmd[i++] = cmd[j++];
+	}
+	new_cmd[i] = '\0';
+	free(cmd);
+	return (new_cmd);
 }

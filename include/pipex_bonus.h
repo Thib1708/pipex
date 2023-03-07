@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:36:02 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/25 17:13:44 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/07 11:44:16 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,5 +45,6 @@ int			ft_perror(char *error);
 char		*ft_rm_quotes(char *cmd);
 int			ft_check_quotes(char *cmd, char type_quote);
 char		**ft_split_cmd(char	*cmd);
+void		ft_cmd_not_found(char *cmd);
 
 #endif

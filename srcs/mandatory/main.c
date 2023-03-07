@@ -5,12 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/05 15:27:20 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/21 16:29:17 by tgiraudo         ###   ########.fr       */
+/*   Created: 2023/02/06 13:34:33 by tgiraudo          #+#    #+#             */
+/*   Updated: 2023/03/07 11:52:34 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
+#include "../../include/pipex.h"
 
 /*A function to print error message on the error output*/
 int	ft_perror(char *error)
@@ -37,30 +37,42 @@ void	ft_free_tab(char **tab)
 	free(tab);
 }
 
-/*A function to free struct*/
-void	ft_free_arg(t_arg *arg)
+/*A function to free an 3D array*/
+void	ft_free_stack(char ***stack)
 {
-	ft_free_tab(arg->cmd1);
-	ft_free_tab(arg->cmd2);
-	free(arg);
+	int	i;
+	int	j;
+
+	i = -1;
+	while (stack[++i])
+	{
+		j = -1;
+		while (stack[i][++j])
+			free(stack[i][j]);
+		free(stack[i]);
+	}
+	free(stack);
 }
 
-int	main(int argc, char **argv, char **env)
+/*A function to free struct*/
+void	ft_free_all(t_pipex *args)
 {
-	t_arg	*arg;
+	ft_free_stack(args->cmds);
+	close(args->fdd);
+	close(args->outfile);
+	free(args);
+}
 
-	if (argc != 5)
-	{
-		ft_printf("Usage: {infile} [command1] [command2] {outfile}.");
+int	main(int argc, char **argv, char **envp)
+{
+	t_pipex	*args;
+
+	if (argc < 5)
+		return (ft_printf_fd(1, "Usage:\n{infile} [command1] [comand2] {outfile}"));
+	args = ft_init_struct(argc, argv, envp);
+	if (!args)
 		return (1);
-	}
-	if (!env[0])
-		return (0);
-	arg = init_arg(argv, env);
-	if (!arg)
-		return (1);
-	if (ft_pipe(arg))
-		return (ft_free_arg(arg), 1);
-	ft_free_arg(arg);
+	ft_pipe(args);
+	ft_free_all(args);
 	return (0);
 }
