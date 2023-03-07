@@ -6,21 +6,20 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:34:33 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 11:52:34 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:11:24 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex.h"
 
-/*A function to print error message on the error output*/
-int	ft_perror(char *error)
+int	ft_check_cmd(char *cmd)
 {
-	char	*join;
-
-	join = ft_strjoin("pipex: ", error);
-	perror(join);
-	free(join);
-	return (1);
+	if (!ft_strncmp("./", cmd, 2))
+		return (write(STDERR_FILENO, "pipex: ./: is a directory\n", 27), 1);
+	if (!ft_strncmp(".", cmd, 1))
+		return (write(STDERR_FILENO, "pipex: .: filename argument required\n \
+		.: usage: . filename [arguments]\n", 71), 1);
+	return (0);
 }
 
 /*A function to free an 2D array*/
@@ -68,7 +67,8 @@ int	main(int argc, char **argv, char **envp)
 	t_pipex	*args;
 
 	if (argc < 5)
-		return (ft_printf_fd(1, "Usage:\n{infile} [command1] [comand2] {outfile}"));
+		return (ft_printf_fd(1, "Usage:\n{infile} [command1] \
+		[comand2] {outfile}"));
 	args = ft_init_struct(argc, argv, envp);
 	if (!args)
 		return (1);

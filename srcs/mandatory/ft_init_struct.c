@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 11:54:10 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:10:38 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,6 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 	if (!args->cmds)
 		return (free(args), NULL);
 	return (args);
-}
-
-int	ft_check_cmd(char *cmd)
-{
-	if (!ft_strncmp("./", cmd, 2))
-		return (write(STDERR_FILENO, "pipex: ./: is a directory\n", 27), 1);
-	if (!ft_strncmp(".", cmd, 1))
-		return (write(STDERR_FILENO, "pipex: .: filename argument required\n .: usage: . filename [arguments]\n", 71), 1);
-	return (0);
 }
 
 char	*ft_get_path(t_pipex *arg, char *cmd)

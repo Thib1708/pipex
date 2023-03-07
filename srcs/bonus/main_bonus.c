@@ -6,21 +6,21 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:34:33 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/01 12:03:26 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:09:58 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-/*A function to print error message on the error output*/
-int	ft_perror(char *error)
+int	ft_check_cmd(char *cmd)
 {
-	char	*join;
-
-	join = ft_strjoin("pipex: ", error);
-	perror(join);
-	free(join);
-	return (1);
+	if (!ft_strncmp("./", cmd, 2))
+		return (ft_printf_fd(STDERR_FILENO, "pipex: %s: \
+		is a directory\n", cmd), 1);
+	if (!ft_strncmp(".", cmd, 1))
+		return (ft_printf_fd(STDERR_FILENO, "pipex: %s: filename argument \
+		required\n .: usage: . filename [arguments]", cmd), 1);
+	return (0);
 }
 
 /*A function to free an 2D array*/
@@ -70,8 +70,6 @@ int	main(int argc, char **argv, char **envp)
 	if (argc < 5)
 		return (ft_printf_fd(1, "Usage:\n{infile} [commands](2...n) {outfile}\
 		\nor\nheredoc {limiter} [command] {outfile}"));
-	// if (!envp[0])
-	// 	return (ft_printf_fd(1, "Cannot compile without environment"), 0);
 	args = ft_init_struct(argc, argv, envp);
 	if (!args)
 		return (1);
