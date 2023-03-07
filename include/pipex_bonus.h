@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:36:02 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 11:44:16 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/07 12:13:08 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,5 +46,6 @@ char		*ft_rm_quotes(char *cmd);
 int			ft_check_quotes(char *cmd, char type_quote);
 char		**ft_split_cmd(char	*cmd);
 void		ft_cmd_not_found(char *cmd);
+int			ft_check_cmd(char *cmd);
 
 #endif
