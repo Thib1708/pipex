@@ -1,0 +1,5 @@
+test-*
+.objs
+libft.a
+pipex
+pipex_bonus

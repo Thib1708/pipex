@@ -6,12 +6,13 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:12:25 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/03/07 11:43:52 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/03/08 10:07:00 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 PRINT = @printf
 NAME		= pipex
+NAME_B		= pipex_bonus
 
 FLAGS		= -Wall -Wextra -Werror
 
@@ -72,10 +73,10 @@ ${NAME}		: ascii lib ${OBJS}
 				@${PRINT} "\r${GREEN}Compiling ${NAME} : DONE${DEFAULT}\n\n"
 				
 bonus		: ascii_bonus lib ${OBJS_BONUS}
-				@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\r"
-				@${PRINT} "\n${YELLOW}Compiling ${NAME}..."
-				@${CC} -fsanitize=address ${OBJS_BONUS} ${LIBFT} -o ${NAME}
-				@${PRINT} "\r${GREEN}Compiling ${NAME} : DONE${DEFAULT}\n\n"
+				@${PRINT} "${GREEN}${SUPPR}Creating ${NAME_B}'s objects : DONE\r"
+				@${PRINT} "\n${YELLOW}Compiling ${NAME_B}..."
+				@${CC} ${OBJS_BONUS} ${LIBFT} -o ${NAME_B}
+				@${PRINT} "\r${GREEN}Compiling ${NAME_B} : DONE${DEFAULT}\n\n"
 
 ascii :
 		@${PRINT} "$$ASCII"	
@@ -95,6 +96,7 @@ fclean		: clean
 				@${MAKE} fclean -C ./libft
 				@${PRINT} "${RED}Deleting executable : DONE\n\n${DEFAULT}"
 				@rm -f ${NAME}
+				@rm -f ${NAME_B}
 
 re			: ascii fclean all
 
