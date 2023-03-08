@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:44:34 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/02 10:34:15 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/08 11:17:40 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,8 @@ int	ft_heredoc(t_pipex *args)
 			return (ft_perror("pipe"));
 		while (1)
 		{
-			write (1, "heredoc>", 8);
-			get_next_line(1, &line);
+			write (1, "heredoc>", 9);
+			get_next_line(1, &line, args->limiter);
 			if (!ft_strncmp(line, args->limiter, ft_strlen(line)))
 				break ;
 			write(fd[1], line, ft_strlen(line));
@@ -50,6 +50,8 @@ int	ft_heredoc(t_pipex *args)
 			free(line);
 		}
 		free(line);
+		// while(get_next_line(1, &line))
+		// 	free(line);
 		args->fdd = fd[0];
 		close(fd[1]);
 	}
