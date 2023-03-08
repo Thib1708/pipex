@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 12:10:38 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/08 10:10:18 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,8 +87,7 @@ char	*ft_get_path(t_pipex *arg, char *cmd)
 		return (cmd);
 	paths = ft_split(get_all_path(arg->envp), ":");
 	if (!paths)
-		return (ft_printf_fd(STDERR_FILENO, "pipex: %s: \
-		command not found\n", cmd), cmd);
+		return (ft_cmd_not_found(cmd), cmd);
 	i = -1;
 	while (paths[++i])
 	{
