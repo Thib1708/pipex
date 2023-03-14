@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/11 12:09:46 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/02/07 11:18:33 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/08 11:18:01 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,7 +100,7 @@ char	*ft_read_buf(char *save, int fd)
 	return (save);
 }
 
-int	get_next_line(int fd, char **line)
+int	get_next_line(int fd, char **line, char *end)
 {
 	static char	*save;
 
@@ -117,7 +117,9 @@ int	get_next_line(int fd, char **line)
 		return (free(save), (0));
 	*line = ft_line(save);
 	if (!*line)
-		return (0);
+		return (free(save), 0);
 	save = ft_next_line(save);
+	if (!ft_strncmp(*line, end, ft_strlen(*line)))
+		free(save);
 	return (1);
 }
