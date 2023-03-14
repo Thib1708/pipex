@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:31:04 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 12:12:58 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:27:20 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,9 @@ typedef struct s_pipex
 	int		fdd;
 	char	**envp;
 	int		i;
+	int		size;
+	pid_t	*pid_tab;
+	int		*close_tab;
 }	t_pipex;
 
 char		*ft_get_path(t_pipex *arg, char *cmd);

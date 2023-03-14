@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
+#    By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:12:25 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/03/08 10:07:00 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/03/08 10:36:11 by thibaultgir      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -75,7 +75,7 @@ ${NAME}		: ascii lib ${OBJS}
 bonus		: ascii_bonus lib ${OBJS_BONUS}
 				@${PRINT} "${GREEN}${SUPPR}Creating ${NAME_B}'s objects : DONE\r"
 				@${PRINT} "\n${YELLOW}Compiling ${NAME_B}..."
-				@${CC} ${OBJS_BONUS} ${LIBFT} -o ${NAME_B}
+				@${CC} ${OBJS_BONUS} ${LIBFT} -o ${NAME}
 				@${PRINT} "\r${GREEN}Compiling ${NAME_B} : DONE${DEFAULT}\n\n"
 
 ascii :

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/08 10:10:18 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:39:45 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,21 @@ int	ft_fill_struct(t_pipex *args, char **argv, int argc)
 	int	i;
 
 	i = 1;
+	args->size = argc - 3;
 	args->fdd = open(argv[i++], O_RDONLY);
 	if (args->fdd == -1)
 	{
 		ft_perror(argv[i - 1]);
 		args->fdd = 1;
 		args->i++;
+		args->size--;
 	}
+	args->pid_tab = ft_calloc(sizeof(pid_t), (args->size + 1));
+	if (!args->pid_tab)
+		return (0);
+	args->close_tab = ft_calloc(sizeof(pid_t), (args->size + 1));
+	if (!args->close_tab)
+		return (free(args->pid_tab), 0);
 	args->outfile = open(argv[argc -1], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	return (i);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_struct_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/08 10:05:17 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/11 11:22:04 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_fill_struct(t_pipex *args, char **argv, int argc)
 	int	i;
 
 	i = 1;
-	if (!ft_strncmp("here_doc", argv[i], ft_strlen(argv[i])))
+	if (!ft_strncmp("here_doc", argv[i], 6))
 	{
 		args->here_doc = 1;
 		args->limiter = argv[++i];
