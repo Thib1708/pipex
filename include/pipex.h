@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/05 15:31:04 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/11 11:27:20 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/14 13:11:15 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,5 +48,6 @@ int			ft_check_quotes(char *cmd, char type_quote);
 char		**ft_split_cmd(char	*cmd);
 void		ft_cmd_not_found(char *cmd);
 int			ft_check_cmd(char *cmd);
+int			ft_wait_execution(t_pipex *args);
 
 #endif

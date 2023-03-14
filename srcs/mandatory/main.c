@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:34:33 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 12:11:24 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/14 13:11:37 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	ft_free_stack(char ***stack)
 void	ft_free_all(t_pipex *args)
 {
 	ft_free_stack(args->cmds);
-	close(args->fdd);
+	// close(args->fdd);
 	close(args->outfile);
 	free(args);
 }
@@ -73,6 +73,7 @@ int	main(int argc, char **argv, char **envp)
 	if (!args)
 		return (1);
 	ft_pipe(args);
+	ft_wait_execution(args);
 	ft_free_all(args);
 	return (0);
 }

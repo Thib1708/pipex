@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/11 11:39:45 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/14 13:15:41 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
