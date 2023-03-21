@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:47 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 11:15:31 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:12:08 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	**ft_split_cmd(char	*cmd)
 	if (malloc_size == 0)
 	{
 		split_cmd = malloc(sizeof(char *) * 2);
+		if (!split_cmd)
+			return (NULL);
 		split_cmd[0] = ft_strdup(" ");
 		split_cmd[1] = NULL;
 		return (split_cmd);
@@ -120,6 +122,8 @@ char	*ft_rm_quotes(char *cmd)
 
 	malloc_size = 0;
 	i = -1;
+	if (!cmd)
+		return (NULL);
 	while (cmd[++i])
 		if (cmd[i] != '"' && cmd[i] != '\'')
 			malloc_size++;
@@ -135,6 +139,5 @@ char	*ft_rm_quotes(char *cmd)
 		new_cmd[i++] = cmd[j++];
 	}
 	new_cmd[i] = '\0';
-	free(cmd);
-	return (new_cmd);
+	return (free(cmd), new_cmd);
 }

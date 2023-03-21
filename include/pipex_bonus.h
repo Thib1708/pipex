@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:36:02 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/07 14:09:21 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/14 14:27:22 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,9 @@ typedef struct s_pipex
 	int		here_doc;
 	char	*limiter;
 	int		i;
+	int		size;
+	pid_t	*pid_tab;
+	int		*close_tab;
 }	t_pipex;
 
 char		*ft_get_path(t_pipex *arg, char *cmd);
@@ -48,5 +51,6 @@ int			ft_check_quotes(char *cmd, char type_quote);
 char		**ft_split_cmd(char	*cmd);
 void		ft_cmd_not_found(char *cmd);
 int			ft_check_cmd(char *cmd);
+int			ft_wait_execution(t_pipex *args);
 
 #endif

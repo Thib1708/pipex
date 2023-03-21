@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:34:33 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 13:11:37 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/14 16:57:21 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,9 @@ void	ft_free_stack(char ***stack)
 /*A function to free struct*/
 void	ft_free_all(t_pipex *args)
 {
+	free(args->pid_tab);
+	free(args->close_tab);
 	ft_free_stack(args->cmds);
-	// close(args->fdd);
 	close(args->outfile);
 	free(args);
 }

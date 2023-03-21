@@ -35,7 +35,6 @@ int	ft_wait_execution(t_pipex *args)
 	int	i;
 
 	i = args->size - 1;
-	// ft_printf_fd(1, "\n\n%d\n\n", args->size);
 	while (i >= 0)
 	{
 		waitpid(args->pid_tab[i], NULL, 0);
@@ -81,6 +80,5 @@ int	ft_pipe(t_pipex *args)
 		ft_add_pid(args, pid);
 		args->fdd = fd[0];
 	}
-	// ft_wait_execution(args);
 	return (0);
 }

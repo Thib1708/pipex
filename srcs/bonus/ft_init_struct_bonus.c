@@ -6,7 +6,7 @@
 /*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/11 11:22:04 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/21 11:39:38 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,10 @@ char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
 		j++;
 	}
 	args->cmds[j] = NULL;
+	args->size = j - 1;
+	args->pid_tab = ft_calloc(sizeof(pid_t), (args->size + 1));
+	if (!args->pid_tab)
+		return (ft_free_all(args), NULL);
 	return (args->cmds);
 }
 
@@ -83,6 +87,9 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 	args->cmds = ft_fill_cmds(args, argv, argc, i);
 	if (!args->cmds)
 		return (free(args), NULL);
+	args->close_tab = ft_calloc(sizeof(pid_t), (args->size + 1));
+	if (!args->close_tab)
+		return (ft_free_all(args), NULL);
 	return (args);
 }
 

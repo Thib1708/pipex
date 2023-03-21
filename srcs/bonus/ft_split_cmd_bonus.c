@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:47 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/01 12:01:56 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:12:40 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,8 @@ char	**ft_split_cmd(char	*cmd)
 	if (malloc_size == 0)
 	{
 		split_cmd = malloc(sizeof(char *) * 2);
+		if (!split_cmd)
+			return (NULL);
 		split_cmd[0] = ft_strdup(" ");
 		split_cmd[1] = NULL;
 		return (split_cmd);

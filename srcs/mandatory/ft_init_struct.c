@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 13:15:41 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/14 18:05:02 by thibaultgir      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 		return (free(args), NULL);
 	args->cmds = ft_fill_cmds(args, argv, argc, i);
 	if (!args->cmds)
-		return (free(args), NULL);
+		return (free(args->close_tab), free(args->pid_tab), free(args), NULL);
 	return (args);
 }
 
