@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:44:34 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/22 11:44:26 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/22 13:58:33 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int	ft_pipe(t_pipex *args)
 	pid_t	pid;
 
 	if (dup2(args->outfile, STDOUT_FILENO) == -1)
-			return (ft_perror("dup2"));
+		return (ft_perror("dup2"));
 	while (args->cmds[++args->i] != NULL)
 	{
 		if (pipe(fd) == -1)
