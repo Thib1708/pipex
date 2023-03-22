@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:34:33 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 18:20:19 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/22 12:52:02 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,11 @@ void	ft_free_stack(char ***stack)
 /*A function to free struct*/
 void	ft_free_all(t_pipex *args)
 {
+	free(args->pid_tab);
+	free(args->close_tab);
 	ft_free_stack(args->cmds);
 	close(args->outfile);
+	close(args->fdd);
 	free(args);
 }
 

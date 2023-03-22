@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_struct_bonus.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/21 11:39:38 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/22 13:53:05 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
+char	***ft_fill_cmds(t_pipex *a, char **argv, int argc, int i)
 {
 	int	j;
 	int	k;
@@ -22,22 +22,22 @@ char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
 	while (argc - 1 > k)
 		if (argv[k++][0] == '\0')
 			return (NULL);
-	args->cmds = malloc(sizeof(char **) * (argc - 1));
-	if (!args->cmds)
+	a->cmds = malloc(sizeof(char **) * (argc - 1));
+	if (!a->cmds)
 		return (NULL);
 	while (argc - 1 > i)
 	{
-		args->cmds[j] = ft_split_cmd(argv[i++]);
-		if (!args->cmds[j])
-			return (ft_free_all(args), NULL);
+		a->cmds[j] = ft_split(argv[i++], " ");
+		if (!a->cmds[j])
+			return (free(a->cmds), NULL);
 		j++;
 	}
-	args->cmds[j] = NULL;
-	args->size = j - 1;
-	args->pid_tab = ft_calloc(sizeof(pid_t), (args->size + 1));
-	if (!args->pid_tab)
-		return (ft_free_all(args), NULL);
-	return (args->cmds);
+	a->cmds[j] = NULL;
+	a->size = j;
+	a->pid_tab = ft_calloc(sizeof(pid_t), (a->size + 1));
+	if (!a->pid_tab)
+		return (ft_free_stack(a->cmds), NULL);
+	return (a->cmds);
 }
 
 int	ft_fill_struct(t_pipex *args, char **argv, int argc)
@@ -86,8 +86,8 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 		return (free(args), NULL);
 	args->cmds = ft_fill_cmds(args, argv, argc, i);
 	if (!args->cmds)
-		return (free(args), NULL);
-	args->close_tab = ft_calloc(sizeof(pid_t), (args->size + 1));
+		return (close(args->fdd), close(args->outfile), free(args), NULL);
+	args->close_tab = ft_calloc(sizeof(int), (args->size + 1));
 	if (!args->close_tab)
 		return (ft_free_all(args), NULL);
 	return (args);

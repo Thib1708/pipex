@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+         #
+#    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:12:25 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/03/14 12:32:11 by thibaultgir      ###   ########.fr        #
+#    Updated: 2023/03/22 11:49:56 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,12 +60,6 @@ ${DIR_OBJS}%.o 		: %.c
 				@${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ 
 				@printf "${GREEN}\033[2KCreating ${NAME}'s objects : DONE\r"
 
-# ${NAME}		: ascii lib ${OBJS}
-# 				@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\r"
-# 				@${PRINT} "\n${YELLOW}Compiling ${NAME}..."
-# 				@${CC} -fsanitize=address ${OBJS} ${LIBFT} -o ${NAME}
-# 				@${PRINT} "\r${GREEN}Compiling ${NAME} : DONE${DEFAULT}\n\n"
-
 ${NAME}		: ascii lib ${OBJS}
 				@${PRINT} "${GREEN}${SUPPR}Creating ${NAME}'s objects : DONE\r"
 				@${PRINT} "\n${YELLOW}Compiling ${NAME}..."
@@ -75,7 +69,7 @@ ${NAME}		: ascii lib ${OBJS}
 bonus		: ascii_bonus lib ${OBJS_BONUS}
 				@${PRINT} "${GREEN}${SUPPR}Creating ${NAME_B}'s objects : DONE\r"
 				@${PRINT} "\n${YELLOW}Compiling ${NAME_B}..."
-				@${CC} ${OBJS_BONUS} ${LIBFT} -o ${NAME}
+				@${CC} ${OBJS_BONUS} ${LIBFT} -o ${NAME_B}
 				@${PRINT} "\r${GREEN}Compiling ${NAME_B} : DONE${DEFAULT}\n\n"
 
 ascii :

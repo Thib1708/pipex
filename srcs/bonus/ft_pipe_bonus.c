@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_pipe_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:44:34 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 18:21:12 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/22 12:42:57 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	ft_exec(t_pipex *args, int fd[2], int i)
 		return (ft_perror("dup2"));
 	if (args->cmds[i + 1] != NULL)
 	{
-		if (dup2(fd[1], 1) == -1)
+		if (dup2(fd[1], STDOUT_FILENO) == -1)
 			return (ft_perror("dup2"));
 	}
 	close(fd[0]);
@@ -26,7 +26,10 @@ int	ft_exec(t_pipex *args, int fd[2], int i)
 	if (!args->cmds[i][0])
 		return (0);
 	if (execve(args->cmds[i][0], args->cmds[i], args->envp) == -1)
+	{
+		close(fd[1]);
 		return (0);
+	}
 	return (1);
 }
 

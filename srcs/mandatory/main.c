@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 13:34:33 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 16:57:21 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/22 13:21:24 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	ft_free_all(t_pipex *args)
 	free(args->close_tab);
 	ft_free_stack(args->cmds);
 	close(args->outfile);
+	close(args->fdd);
 	free(args);
 }
 
@@ -67,9 +68,9 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_pipex	*args;
 
-	if (argc < 5)
+	if (argc != 5)
 		return (ft_printf_fd(1, "Usage:\n{infile} [command1] \
-		[comand2] {outfile}"));
+		[comand2] {outfile}\n"));
 	args = ft_init_struct(argc, argv, envp);
 	if (!args)
 		return (1);

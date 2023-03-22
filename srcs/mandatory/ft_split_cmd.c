@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:47 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 18:12:08 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/22 13:49:31 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	**ft_fill_stack(char *cmd, char **split_cmd, int i)
 		if (i != save)
 			split_cmd[index] = ft_rm_quotes(ft_substr(cmd, save, i - save));
 		if (!split_cmd[index++])
-			return (ft_free_tab(split_cmd), NULL);
+			return (NULL);
 	}
 	split_cmd[index] = NULL;
 	return (split_cmd);
@@ -90,6 +90,12 @@ char	**ft_split_cmd(char	*cmd)
 	if (!split_cmd)
 		return (NULL);
 	split_cmd = ft_fill_stack(cmd, split_cmd, 0);
+	if (!split_cmd)
+	{
+		write(1, "split\n", 7);
+		free(split_cmd);
+		return (NULL);
+	}
 	return (split_cmd);
 }
 
@@ -127,9 +133,10 @@ char	*ft_rm_quotes(char *cmd)
 	while (cmd[++i])
 		if (cmd[i] != '"' && cmd[i] != '\'')
 			malloc_size++;
-	new_cmd = malloc(sizeof(char) * (malloc_size + 1));
+	// new_cmd = malloc(sizeof(char) * (malloc_size + 1));
+	new_cmd = NULL;
 	if (!new_cmd)
-		return (NULL);
+		return (free(cmd), NULL);
 	i = 0;
 	j = 0;
 	while (cmd[j])

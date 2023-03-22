@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_init_struct.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 18:05:02 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/22 13:50:26 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
 		return (NULL);
 	while (argc - 1 > i)
 	{
-		args->cmds[j] = ft_split_cmd(argv[i++]);
+		args->cmds[j] = ft_split(argv[i++], " ");
 		if (!args->cmds[j])
-			return (ft_free_all(args), NULL);
+			return (free(args->cmds), NULL);
 		j++;
 	}
 	args->cmds[j] = NULL;
@@ -79,7 +79,8 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 		return (free(args), NULL);
 	args->cmds = ft_fill_cmds(args, argv, argc, i);
 	if (!args->cmds)
-		return (free(args->close_tab), free(args->pid_tab), free(args), NULL);
+		return (free(args->close_tab), free(args->pid_tab), close(args->fdd), \
+		close(args->outfile), free(args), NULL);
 	return (args);
 }
 

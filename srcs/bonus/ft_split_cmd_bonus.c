@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split_cmd_bonus.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thibaultgiraudon <thibaultgiraudon@stud    +#+  +:+       +#+        */
+/*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/09 16:11:47 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/14 18:12:40 by thibaultgir      ###   ########.fr       */
+/*   Updated: 2023/03/22 13:12:14 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,7 +127,7 @@ char	*ft_rm_quotes(char *cmd)
 			malloc_size++;
 	new_cmd = malloc(sizeof(char) * (malloc_size + 1));
 	if (!new_cmd)
-		return (NULL);
+		return (free(cmd), NULL);
 	i = 0;
 	j = 0;
 	while (cmd[j])
