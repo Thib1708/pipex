@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:12:25 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/03/28 10:57:09 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/03/28 12:14:13 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,9 @@ MAKEFLAGS	+= --no-print-directory
 CC 			= gcc
 
 HEADER_PATH	= include/
+
+HEADER = ${HEADER_PATH}/pipex.h \
+		 ${HEADER_PATH}/pipex_bonus.h
 
 DIR_OBJS = .objs/
 
@@ -52,7 +55,7 @@ SRCS_BONUS = ${addprefix ${DIR_SRCS_BONUS}, ${LIST_SRCS_BONUS}}
 
 all			: ${NAME}
 
-${DIR_OBJS}%.o 		: %.c 
+${DIR_OBJS}%.o 		: %.c ${HEADER} Makefile 
 				@mkdir -p $(shell dirname $@)
 				@printf "${YELLOW}\033[2KCreating ${NAME}'s objects : $@\r"
 				@${CC} ${FLAGS} ${INCLUDES} -c $< -o $@ 
