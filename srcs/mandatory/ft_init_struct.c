@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/22 13:50:26 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/28 10:57:40 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,10 +68,6 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 	args = malloc(sizeof(t_pipex));
 	if (!args)
 		return (NULL);
-	i = 0;
-	while (argv[++i])
-		if (!ft_check_quotes(argv[i], '"') || !ft_check_quotes(argv[i], '\''))
-			return (free(args), NULL);
 	args->envp = envp;
 	args->i = -1;
 	i = ft_fill_struct(args, argv, argc);

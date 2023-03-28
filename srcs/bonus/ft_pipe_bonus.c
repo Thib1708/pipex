@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:44:34 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/22 12:42:57 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:20:01 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	ft_heredoc(t_pipex *args)
 		{
 			write (1, "heredoc>", 9);
 			get_next_line(1, &line, args->limiter);
-			if (!ft_strncmp(line, args->limiter, ft_strlen(line)))
+			if (!ft_strncmp(line, args->limiter, ft_strlen(args->limiter) + 1))
 				break ;
 			write(fd[1], line, ft_strlen(line));
 			write(fd[1], "\n", 1);

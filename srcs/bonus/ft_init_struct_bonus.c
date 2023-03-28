@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/22 13:53:05 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/28 11:25:34 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_fill_struct(t_pipex *args, char **argv, int argc)
 	int	i;
 
 	i = 1;
-	if (!ft_strncmp("here_doc", argv[i], 6))
+	if (!ft_strncmp("here_doc", argv[i], 9))
 	{
 		args->here_doc = 1;
 		args->limiter = argv[++i];
@@ -74,10 +74,6 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 	args = malloc(sizeof(t_pipex));
 	if (!args)
 		return (NULL);
-	i = 0;
-	while (argv[++i])
-		if (!ft_check_quotes(argv[i], '"') || !ft_check_quotes(argv[i], '\''))
-			return (free(args), NULL);
 	args->envp = envp;
 	args->here_doc = 0;
 	args->i = -1;

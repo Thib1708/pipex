@@ -6,7 +6,7 @@
 #    By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/24 11:12:25 by tgiraudo          #+#    #+#              #
-#    Updated: 2023/03/22 11:49:56 by tgiraudo         ###   ########.fr        #
+#    Updated: 2023/03/28 10:57:09 by tgiraudo         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,6 @@ LIBFT 		= -L ./libft -lft
 LIST_SRCS_MANDATORY		=	main.c				\
 							ft_pipe.c			\
 							ft_init_struct.c	\
-							ft_split_cmd.c		\
 							ft_print_error.c	\
 
 OBJS = $(patsubst %.c, $(DIR_OBJS)%.o, $(SRCS_MANDATORY))
@@ -45,7 +44,6 @@ SRCS_MANDATORY = ${addprefix ${DIR_SRCS_MANDATORY}, ${LIST_SRCS_MANDATORY}}
 LIST_SRCS_BONUS		=	main_bonus.c				\
 						ft_init_struct_bonus.c		\
 						ft_pipe_bonus.c 			\
-						ft_split_cmd_bonus.c		\
 						ft_print_error_bonus.c		\
 
 OBJS_BONUS = $(patsubst %.c, $(DIR_OBJS)%.o, $(SRCS_BONUS))
