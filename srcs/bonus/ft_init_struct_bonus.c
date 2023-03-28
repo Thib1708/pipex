@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/28 12:05:36 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:17:20 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,11 @@ char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
 		args->cmds[j] = ft_split(argv[i++], " ");
 		if (!args->cmds[j])
 			return (free(args->cmds), NULL);
-		if (!args->cmds[j][0])
+		if (!args->cmds[j++][0])
 		{
-			args->cmds[j + 1] = NULL;
+			args->cmds[j] = NULL;
 			return (ft_free_stack(args->cmds), NULL);
 		}
-		j++;
 	}
 	args->cmds[j] = NULL;
 	args->size = j;
