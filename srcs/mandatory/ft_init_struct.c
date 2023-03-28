@@ -6,7 +6,7 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/28 10:57:40 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:03:31 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
 		args->cmds[j] = ft_split(argv[i++], " ");
 		if (!args->cmds[j])
 			return (free(args->cmds), NULL);
+		if (!args->cmds[j][0])
+		{
+			args->cmds[j + 1] = NULL;
+			return (ft_free_stack(args->cmds), NULL);
+		}
 		j++;
 	}
 	args->cmds[j] = NULL;
@@ -86,6 +91,8 @@ char	*ft_get_path(t_pipex *arg, char *cmd)
 	char	*current_path;
 	int		i;
 
+	if(cmd[0] == '\0')
+		return(free(cmd), ft_strdup(" "));
 	if (ft_check_cmd(cmd))
 		return (cmd);
 	if (access(cmd, F_OK) == 0)

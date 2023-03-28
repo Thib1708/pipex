@@ -6,13 +6,13 @@
 /*   By: tgiraudo <tgiraudo@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/06 14:41:28 by tgiraudo          #+#    #+#             */
-/*   Updated: 2023/03/28 11:25:34 by tgiraudo         ###   ########.fr       */
+/*   Updated: 2023/03/28 12:05:36 by tgiraudo         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../include/pipex_bonus.h"
 
-char	***ft_fill_cmds(t_pipex *a, char **argv, int argc, int i)
+char	***ft_fill_cmds(t_pipex *args, char **argv, int argc, int i)
 {
 	int	j;
 	int	k;
@@ -22,22 +22,24 @@ char	***ft_fill_cmds(t_pipex *a, char **argv, int argc, int i)
 	while (argc - 1 > k)
 		if (argv[k++][0] == '\0')
 			return (NULL);
-	a->cmds = malloc(sizeof(char **) * (argc - 1));
-	if (!a->cmds)
+	args->cmds = malloc(sizeof(char **) * (argc - 1));
+	if (!args->cmds)
 		return (NULL);
 	while (argc - 1 > i)
 	{
-		a->cmds[j] = ft_split(argv[i++], " ");
-		if (!a->cmds[j])
-			return (free(a->cmds), NULL);
+		args->cmds[j] = ft_split(argv[i++], " ");
+		if (!args->cmds[j])
+			return (free(args->cmds), NULL);
+		if (!args->cmds[j][0])
+		{
+			args->cmds[j + 1] = NULL;
+			return (ft_free_stack(args->cmds), NULL);
+		}
 		j++;
 	}
-	a->cmds[j] = NULL;
-	a->size = j;
-	a->pid_tab = ft_calloc(sizeof(pid_t), (a->size + 1));
-	if (!a->pid_tab)
-		return (ft_free_stack(a->cmds), NULL);
-	return (a->cmds);
+	args->cmds[j] = NULL;
+	args->size = j;
+	return (args->cmds);
 }
 
 int	ft_fill_struct(t_pipex *args, char **argv, int argc)
@@ -83,6 +85,9 @@ t_pipex	*ft_init_struct(int argc, char **argv, char **envp)
 	args->cmds = ft_fill_cmds(args, argv, argc, i);
 	if (!args->cmds)
 		return (close(args->fdd), close(args->outfile), free(args), NULL);
+	args->pid_tab = ft_calloc(sizeof(pid_t), (args->size + 1));
+	if (!args->pid_tab)
+		return (ft_free_stack(args->cmds), NULL);
 	args->close_tab = ft_calloc(sizeof(int), (args->size + 1));
 	if (!args->close_tab)
 		return (ft_free_all(args), NULL);
